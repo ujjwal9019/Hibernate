@@ -1,2 +1,2 @@
 # Hibernate
-This is hibernate  searies
+This is daliy hibernate practice repository
