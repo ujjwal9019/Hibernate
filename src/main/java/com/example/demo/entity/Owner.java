@@ -1,9 +1,8 @@
 package com.example.demo.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.example.demo.enums.Gender;
+import com.example.demo.enums.PetType;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
@@ -12,23 +11,61 @@ import java.time.LocalDate;
 public class Owner {
     @Id
     private int id;
-    @Column(name = "First_Name" , nullable = false)
+    @Column(name = "first_name" , nullable = false)
     private String FirstName;
-    
+
+    @Column(name = "last_name" , nullable = false)
     private String LastName;
+
+    @Enumerated(value = EnumType.STRING)
+    @Column(  nullable = false)
     private Gender gender;
 
 
-
+    @Column( nullable = false)
     private String city;
+    @Column( nullable = false)
     private String state;
+    @Column( name = "mobile" , nullable = false , length = 10)
     private String mobileNumber;
-    private int petid;
-    private String petName;
-    private LocalDate petBirthDate;
-    private Gender gender;
-    private PetType petType;
 
+    @Column(name = "email_id", nullable = false , unique = true)
+    private String emailId;
+
+    @Column(name = "pet_id" , nullable = false)
+    private int petid;
+
+    @Override
+    public String toString() {
+        return "Owner{" +
+                "id=" + id +
+                ", FirstName='" + FirstName + '\'' +
+                ", LastName='" + LastName + '\'' +
+                ", gender=" + gender +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", mobileNumber='" + mobileNumber + '\'' +
+                ", emailId='" + emailId + '\'' +
+                ", petid=" + petid +
+                ", petName='" + petName + '\'' +
+                ", petBirthDate=" + petBirthDate +
+                ", petGender=" + petGender +
+                ", petType=" + petType +
+                '}';
+    }
+
+    @Column(name = "pet_name" ,  nullable = false)
+    private String petName;
+    @Column( name = "pet_date_of_birth", nullable = false)
+    private LocalDate petBirthDate;
+
+    public Gender getPetGender() {
+        return petGender;
+    }
+
+    public void setPetGender(Gender petGender) {
+        this.petGender = petGender;
+    }
 
     public int getId() {
         return id;
@@ -62,14 +99,6 @@ public class Owner {
         this.gender = gender;
     }
 
-    public PetType getPetType() {
-        return petType;
-    }
-
-    public void setPetType(PetType petType) {
-        this.petType = petType;
-    }
-
     public String getCity() {
         return city;
     }
@@ -92,6 +121,14 @@ public class Owner {
 
     public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
+    }
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
     }
 
     public int getPetid() {
@@ -118,23 +155,21 @@ public class Owner {
         this.petBirthDate = petBirthDate;
     }
 
-    @Override
-    public String toString() {
-        return "Owner{" +
-                "id=" + id +
-                ", FirstName='" + FirstName + '\'' +
-                ", LastName='" + LastName + '\'' +
-                ", gender=" + gender +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", mobileNumber='" + mobileNumber + '\'' +
-                ", petid=" + petid +
-                ", petName='" + petName + '\'' +
-                ", petBirthDate=" + petBirthDate +
-                ", gender=" + gender +
-                ", petType=" + petType +
-                '}';
+    public PetType getPetType() {
+        return petType;
     }
+
+    public void setPetType(PetType petType) {
+        this.petType = petType;
+    }
+    @Enumerated(value = EnumType.STRING)
+    @Column( name = "pet_gender", nullable = false)
+    private Gender petGender;
+    @Enumerated(value = EnumType.STRING)
+    @Column(name = "pet_type" , nullable = false )
+    private PetType petType;
+
+
 
 
 }
